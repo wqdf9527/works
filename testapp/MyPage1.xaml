@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:local="clr-namespace:testapp"
+             x:Class="testapp.MyPage1"
+             Title="Mypage1"
+             BindingContext="{local:Man}"
+             >
+    
+    
+    <ContentPage.Content>
+        <StackLayout Margin="0,44,0,0">
+            <Entry Text="{Binding Name}" />
+            <Entry Text="{Binding Age}" />
+            <Button Text="Button" Clicked="Handle_Clicked"/>
+        </StackLayout>
+                
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="testapp.ExamplePage"
+             xmlns:local="clr-namespace:testapp"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true"
+             >
+    <Grid BackgroundColor="Black" ColumnSpacing="1" RowSpacing="1">
+        
+                   
+        <Label x:Name="lbl" VerticalTextAlignment="End" HorizontalTextAlignment="End" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Text="{Binding Value}" BackgroundColor="Gray" TextColor="White" FontSize="90"/>
+        <Button FontSize="50" TextColor="White" BackgroundColor="Silver" Grid.Row="1" Grid.Column="0" Text="AC" Command="{Binding Zero}"/>
+        <Button FontSize="50" TextColor="White" BackgroundColor="Silver" Grid.Row="1" Grid.Column="1" Text="+/-" Command="{Binding Reciprocal}"/>
+        <Button FontSize="50" TextColor="White" BackgroundColor="Silver" Grid.Row="1" Grid.Column="2" Text="%" Command="{Binding Percent}"/>
+        <Button FontSize="50" TextColor="White" BackgroundColor="Orange" Grid.Row="1" Grid.Column="3" Text="÷"  Command="{Binding Operator}" CommandParameter="{x:Static local:OperatorType.Divided}"/>
+        <Button FontSize="50" TextColor="White" BackgroundColor="Silver" Grid.Row="2" Grid.Column="0" Text="7" Command="{Binding Caculation}" CommandParameter="7"/>
+        <Button FontSize="50" TextColor="White" BackgroundColor="Silver" Grid.Row="2" Grid.Column="1" Text="8" Command="{Binding Caculation}" CommandParameter="8"/>
+        <Button FontSize="50" TextColor="White" BackgroundColor="Silver" Grid.Row="2" Grid.Column="2" Text="9" Command="{Binding Caculation}" CommandParameter="9"/>
+        <Button FontSize="50" TextColor="White" BackgroundColor="Orange" Grid.Row="2" Grid.Column="3" Text="x"  Command="{Binding Operator}" CommandParameter="{x:Static local:OperatorType.Multiplied}" />
+        <Button FontSize="50" TextColor="White" BackgroundColor="Silver" Grid.Row="3" Grid.Column="0" Text="4" Command="{Binding Caculation}" CommandParameter="4"/>
+        <Button FontSize="50" TextColor="White" BackgroundColor="Silver" Grid.Row="3" Grid.Column="1" Text="5" Command="{Binding Caculation}" CommandParameter="5"/>
+        <Button FontSize="50" TextColor="White" BackgroundColor="Silver" Grid.Row="3" Grid.Column="2" Text="6" Command="{Binding Caculation}" CommandParameter="6"/>
+        <Button FontSize="50" TextColor="White" BackgroundColor="Orange" Grid.Row="3" Grid.Column="3" Text="-" Command="{Binding Operator}" CommandParameter="{x:Static local:OperatorType.Minus}" />
+        <Button FontSize="50" TextColor="White" BackgroundColor="Silver" Grid.Row="4" Grid.Column="0" Text="1" Command="{Binding Caculation}" CommandParameter="1"/>
+        <Button FontSize="50" TextColor="White" BackgroundColor="Silver" Grid.Row="4" Grid.Column="1" Text="2" Command="{Binding Caculation}" CommandParameter="2"/>
+        <Button FontSize="50" TextColor="White" BackgroundColor="Silver" Grid.Row="4" Grid.Column="2" Text="3" Command="{Binding Caculation}" CommandParameter="3"/>
+        <Button FontSize="50" TextColor="White" BackgroundColor="Orange" Grid.Row="4" Grid.Column="3" Text="+"  Command="{Binding Operator}" CommandParameter="{x:Static local:OperatorType.Plus}" />
+        <Button FontSize="50" TextColor="White" BackgroundColor="Silver" Grid.Row="5" Grid.Column="0" Text="0" Grid.ColumnSpan="2" Command="{Binding Caculation}" CommandParameter="0"/>     
+        <Button FontSize="50" TextColor="White" BackgroundColor="Silver" Grid.Row="5" Grid.Column="2" Text="." Command="{Binding Caculation}" CommandParameter="." />
+        <Button FontSize="50" TextColor="White" BackgroundColor="Orange" Grid.Row="5" Grid.Column="3" Text="=" Command="{Binding Operator}" CommandParameter="{x:Static local:OperatorType.Equal}"/>
+        </Grid>
+  
+</ContentPage>
