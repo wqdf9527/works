@@ -3,39 +3,46 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="testapp.HWPage"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
-             ios:Page.UseSafeArea="true">
-    
+             ios:Page.UseSafeArea="true"
+             >
    
-        <Grid BackgroundColor="Black" ColumnSpacing="5" RowSpacing="5">
-       
+   <ContentPage.Resources>
+        <Style TargetType="Button">
+            <Setter Property="FontSize" Value="35"/>
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="BackgroundColor" Value="Silver"/>
+        </Style>
+    </ContentPage.Resources>
+        <Grid BackgroundColor="Black" ColumnSpacing="5" RowSpacing="5">    
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="3*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <Label x:Name="lbl" VerticalTextAlignment="End" HorizontalTextAlignment="End" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Text="{Binding Value}" BackgroundColor="Black" TextColor="White" FontSize="70" Margin="15,0,20,0"/>
-        <Button FontSize="50" TextColor="White" BackgroundColor="Silver" Grid.Row="1" Grid.Column="0" Text="AC" Command="{Binding Zero}"/>
-        <Button FontSize="50" TextColor="White" BackgroundColor="Silver" Grid.Row="1" Grid.Column="1" Text="+/-" Command="{Binding Reciprocal}"/>
-        <Button FontSize="50" TextColor="White" BackgroundColor="Silver" Grid.Row="1" Grid.Column="2" Text="%" Command="{Binding Percent}"/>
-        <Button FontSize="50" TextColor="White" BackgroundColor="Orange" Grid.Row="1" Grid.Column="3" Text="÷"  Command="{Binding Caculation}" CommandParameter="/"/>
-        <Button FontSize="50" TextColor="White" BackgroundColor="Silver" Grid.Row="2" Grid.Column="0" Text="7" Command="{Binding Caculation}" CommandParameter="7"/>
-        <Button FontSize="50" TextColor="White" BackgroundColor="Silver" Grid.Row="2" Grid.Column="1" Text="8" Command="{Binding Caculation}" CommandParameter="8"/>
-        <Button FontSize="50" TextColor="White" BackgroundColor="Silver" Grid.Row="2" Grid.Column="2" Text="9" Command="{Binding Caculation}" CommandParameter="9"/>
-        <Button FontSize="50" TextColor="White" BackgroundColor="Orange" Grid.Row="2" Grid.Column="3" Text="x"  Command="{Binding Caculation}" CommandParameter="*" />
-        <Button FontSize="50" TextColor="White" BackgroundColor="Silver" Grid.Row="3" Grid.Column="0" Text="4" Command="{Binding Caculation}" CommandParameter="4"/>
-        <Button FontSize="50" TextColor="White" BackgroundColor="Silver" Grid.Row="3" Grid.Column="1" Text="5" Command="{Binding Caculation}" CommandParameter="5"/>
-        <Button FontSize="50" TextColor="White" BackgroundColor="Silver" Grid.Row="3" Grid.Column="2" Text="6" Command="{Binding Caculation}" CommandParameter="6"/>
-        <Button FontSize="50" TextColor="White" BackgroundColor="Orange" Grid.Row="3" Grid.Column="3" Text="-" Command="{Binding Caculation}" CommandParameter="-" />
-        <Button FontSize="50" TextColor="White" BackgroundColor="Silver" Grid.Row="4" Grid.Column="0" Text="1" Command="{Binding Caculation}" CommandParameter="1"/>
-        <Button FontSize="50" TextColor="White" BackgroundColor="Silver" Grid.Row="4" Grid.Column="1" Text="2" Command="{Binding Caculation}" CommandParameter="2"/>
-        <Button FontSize="50" TextColor="White" BackgroundColor="Silver" Grid.Row="4" Grid.Column="2" Text="3" Command="{Binding Caculation}" CommandParameter="3"/>
-        <Button FontSize="50" TextColor="White" BackgroundColor="Orange" Grid.Row="4" Grid.Column="3" Text="+"  Command="{Binding Caculation}" CommandParameter="+" />
-        <Button FontSize="50" TextColor="White" BackgroundColor="Silver" Grid.Row="5" Grid.Column="0" Text="0" Grid.ColumnSpan="2" Command="{Binding Caculation}" CommandParameter="0"/>     
-        <Button FontSize="50" TextColor="White" BackgroundColor="Silver" Grid.Row="5" Grid.Column="2" Text="." Command="{Binding Caculation}" CommandParameter="." />
-        <Button FontSize="50" TextColor="White" BackgroundColor="Orange" Grid.Row="5" Grid.Column="3" Text="=" Command="{Binding Caculation}" CommandParameter="="/>
+        
+        <Label VerticalTextAlignment="End" HorizontalTextAlignment="End" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Text="{Binding Value}" BackgroundColor="Black" TextColor="White" FontSize="70" Margin="15,0,20,0"/>
+        <Button Grid.Row="1" Grid.Column="0" Text="AC" Command="{Binding Zero}"/>
+        <Button Grid.Row="1" Grid.Column="1" Text="+/-" Command="{Binding Reciprocal}"/>
+        <Button Grid.Row="1" Grid.Column="2" Text="%" Command="{Binding Percent}"/>
+        <Button Grid.Row="1" Grid.Column="3" Text="÷"  Command="{Binding Caculation}" CommandParameter="/" BackgroundColor="Orange" />
+        <Button Grid.Row="2" Grid.Column="0" Text="7" Command="{Binding Caculation}" CommandParameter="7"/>
+        <Button Grid.Row="2" Grid.Column="1" Text="8" Command="{Binding Caculation}" CommandParameter="8"/>
+        <Button Grid.Row="2" Grid.Column="2" Text="9" Command="{Binding Caculation}" CommandParameter="9"/>
+        <Button Grid.Row="2" Grid.Column="3" Text="x"  Command="{Binding Caculation}" CommandParameter="*" BackgroundColor="Orange" />
+        <Button Grid.Row="3" Grid.Column="0" Text="4" Command="{Binding Caculation}" CommandParameter="4"/>
+        <Button Grid.Row="3" Grid.Column="1" Text="5" Command="{Binding Caculation}" CommandParameter="5"/>
+        <Button Grid.Row="3" Grid.Column="2" Text="6" Command="{Binding Caculation}" CommandParameter="6"/>
+        <Button Grid.Row="3" Grid.Column="3" Text="-" Command="{Binding Caculation}" CommandParameter="-" BackgroundColor="Orange" />
+        <Button Grid.Row="4" Grid.Column="0" Text="1" Command="{Binding Caculation}" CommandParameter="1"/>
+        <Button Grid.Row="4" Grid.Column="1" Text="2" Command="{Binding Caculation}" CommandParameter="2"/>
+        <Button Grid.Row="4" Grid.Column="2" Text="3" Command="{Binding Caculation}" CommandParameter="3"/>
+        <Button Grid.Row="4" Grid.Column="3" Text="+"  Command="{Binding Caculation}" CommandParameter="+" BackgroundColor="Orange" />
+        <Button Grid.Row="5" Grid.Column="0" Text="0" Grid.ColumnSpan="2" Command="{Binding Caculation}" CommandParameter="0"/>     
+        <Button Grid.Row="5" Grid.Column="2" Text="." Command="{Binding Caculation}" CommandParameter="." />
+        <Button Grid.Row="5" Grid.Column="3" Text="=" Command="{Binding Caculation}" CommandParameter="=" BackgroundColor="Orange" />
         </Grid>
   
 </ContentPage>
