@@ -103,11 +103,11 @@ namespace testapp
                                         this.Value += ".";
                                     }
                                 }
-                                else
-                                {
-                                    this.Value="0.";
-                                    islonger = true;
-                                }
+                                //else
+                                //{
+                                //    this.Value="0.";
+                                //    islonger = true;
+                                //}
                                 isdot = true;
                             }
                         
