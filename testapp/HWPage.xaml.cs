@@ -20,17 +20,20 @@ namespace testapp
         private string _value = "0";
 
 
-        public string Value { get { return _value; } set { _value = value; PropertyChanged(this, new PropertyChangedEventArgs("Value")); } }
+        public string Value
+        {
+            get { return _value; }
+            set { _value = value; PropertyChanged(this, new PropertyChangedEventArgs("Value")); }
+        }
 
-        private string record = "";
-        private string secondrecord = "";
-        private string symbol = "";
-        private string status = "";
+        private string record = string.Empty;
+        private string secondrecord = string.Empty;
+        private string symbol = string.Empty;
+        private string status = string.Empty;
 
         private bool isdot = false;      
         private bool isequal = false;
         private bool islonger = false;
-        private bool isrecord = false;
 
 
         public enum Status { Isplus, Issubtract, Ismultiplication, Isdivision ,first};   
@@ -47,15 +50,13 @@ namespace testapp
             this.Zero = new Command(() => 
             {
                 this.Value = "0";
-                record = "";
-                secondrecord = "";
+                record = string.Empty;
+                secondrecord = string.Empty;
+                status = string.Empty;
+                symbol = string.Empty;
                 isdot = false;
                 isequal = false;
                 islonger = false;
-                isrecord = false;
-                status = "";
-                symbol = "";
-
             });
 
 
@@ -63,6 +64,7 @@ namespace testapp
             Percent = new Command(() =>
             {
                 this.Value = (double.Parse(this.Value) / 100).ToString();
+                //record = this.Value;
                 this.Isdecimal();
             });
 
@@ -91,30 +93,32 @@ namespace testapp
                             this.Isdecimal();
                             if (!isdot)
                             {
-                                if (status == "")
+                                if (status == string.Empty)
                                 {
                                     this.Value += ".";
 
                                 }
-                                else if(symbol!="")
+                                else if(symbol!= string.Empty)
                                 {
-                                    if (secondrecord != "")
+                                    if (secondrecord != string.Empty)
                                     {
                                         this.Value += ".";
                                     }
                                 }
-                                //else
-                                //{
-                                //    this.Value="0.";
-                                //    islonger = true;
-                                //}
+                                else if(symbol == string.Empty)
+                                {
+                                    if (secondrecord != string.Empty)
+                                    {
+                                        this.Value += ".";
+                                    }
+                                }
                                 isdot = true;
                             }
                         
                             break;
 
                         case "=":
-                            symbol = "";
+                            symbol = string.Empty;
                             islonger = false;
                             if (!string.IsNullOrEmpty(record)&&!string.IsNullOrEmpty(this.Value))
                             {
@@ -177,23 +181,22 @@ namespace testapp
                                 this.Value = input.ToString();
                                 islonger = true;
                             }
-                            else if(symbol!=""&& !islonger)
+                            else if(symbol!= string.Empty && !islonger)
                             {                              
                                 this.Value = input.ToString();
                                 secondrecord = this.Value;
                                 islonger = true;
                             }
-                            else if(isrecord)
+                            else if(record!=string.Empty)
                             {
-                                if (symbol == "" && islonger==false)
+                                if (symbol == string.Empty && islonger==false)
                                 {
                                     this.Value = input.ToString();
-                                    isrecord = false;
+                                    record = string.Empty;
                                 }
                                 else
                                 {
                                     this.Value += input;
-                                    isrecord = false;
                                 }
                             }
                             else
@@ -269,9 +272,9 @@ namespace testapp
         public void Operate(string strsymbol,string strstatus)
         {
             this.Isdecimal();
-            if (symbol != "")
+            if (symbol != string.Empty)
             {
-                if (secondrecord == "")
+                if (secondrecord == string.Empty)
                 {
                     symbol = strsymbol;
                     status = strstatus;
@@ -280,18 +283,18 @@ namespace testapp
                 {
                     this.Symbol();
                     symbol = strsymbol;
-                    secondrecord = "";
+                    status = strstatus;
+                    secondrecord = string.Empty;
                 }
             }
             else
             {
-                secondrecord = "";
+                secondrecord = string.Empty;
                 status = strstatus;
                 isequal = false;
-                if (this.Value != "")
+                if (this.Value != string.Empty)
                 {
                     record = this.Value;
-                    isrecord = true;
                 }
                 symbol = strsymbol;
                 this.Value = record;
