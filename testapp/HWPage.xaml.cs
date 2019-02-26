@@ -53,7 +53,7 @@ namespace testapp
                 isdot = false;
                 isequal = false;
                 islonger = false;
-                SpeakNow("0");
+                SpeakNow("清除");
             });
 
             Reciprocal = new Command(() =>
