@@ -10,11 +10,17 @@
         <Style TargetType="Button">
             <Setter Property="FontSize" Value="35"/>
             <Setter Property="TextColor" Value="White"/>
-            <Setter Property="BackgroundColor" Value="Silver"/>
-            
+            <Setter Property="BackgroundColor" Value="gray"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="WidthRequest" Value="80"/>
+            <Setter Property="HeightRequest" Value="80"/>
+            <Setter Property="CornerRadius" Value="40"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="FontSize" Value="30"/>
         </Style>
     </ContentPage.Resources>
-        <Grid BackgroundColor="Black" ColumnSpacing="5" RowSpacing="5">    
+        <Grid BackgroundColor="Black" ColumnSpacing="0" RowSpacing="0">    
         <Grid.RowDefinitions>
             <RowDefinition Height="3*"/>
             <RowDefinition Height="1*"/>
@@ -24,10 +30,10 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         
-        <Label VerticalTextAlignment="End" HorizontalTextAlignment="End" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Text="{Binding Value}" BackgroundColor="Black" TextColor="White" FontSize="70" Margin="15,0,20,0"/>
-        <Button BorderRadius="5" BorderWidth="2" BorderColor="Black" Grid.Row="1" Grid.Column="0" Text="AC" Command="{Binding Zero}"/>
-        <Button Grid.Row="1" Grid.Column="1" Text="+/-" Command="{Binding Reciprocal}"/>
-        <Button Grid.Row="1" Grid.Column="2" Text="%" Command="{Binding Percent}"/>
+        <Label VerticalTextAlignment="End" HorizontalTextAlignment="End" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Text="{Binding Value}" BackgroundColor="Black" TextColor="White" FontSize="86" Margin="15,0,25,10"/>
+        <Button Grid.Row="1" Grid.Column="0" Text="AC" Command="{Binding Zero}" BackgroundColor="Silver" TextColor="Black"/>
+        <Button Grid.Row="1" Grid.Column="1" Text="+/-" Command="{Binding Reciprocal}" BackgroundColor="Silver" TextColor="Black" />
+        <Button Grid.Row="1" Grid.Column="2" Text="%" Command="{Binding Percent}" BackgroundColor="Silver" TextColor="Black"/>
         <Button Grid.Row="1" Grid.Column="3" Text="÷"  Command="{Binding Caculation}" CommandParameter="/" BackgroundColor="Orange" />
         <Button Grid.Row="2" Grid.Column="0" Text="7" Command="{Binding Caculation}" CommandParameter="7"/>
         <Button Grid.Row="2" Grid.Column="1" Text="8" Command="{Binding Caculation}" CommandParameter="8"/>
@@ -41,7 +47,7 @@
         <Button Grid.Row="4" Grid.Column="1" Text="2" Command="{Binding Caculation}" CommandParameter="2"/>
         <Button Grid.Row="4" Grid.Column="2" Text="3" Command="{Binding Caculation}" CommandParameter="3"/>
         <Button Grid.Row="4" Grid.Column="3" Text="+"  Command="{Binding Caculation}" CommandParameter="+" BackgroundColor="Orange" />
-        <Button Grid.Row="5" Grid.Column="0" Text="0" Grid.ColumnSpan="2" Command="{Binding Caculation}" CommandParameter="0"/>     
+        <Button Grid.Row="5" Grid.Column="0" Text="0" Grid.ColumnSpan="2" Command="{Binding Caculation}" CommandParameter="0" WidthRequest="160"/>     
         <Button Grid.Row="5" Grid.Column="2" Text="." Command="{Binding Caculation}" CommandParameter="." />
         <Button Grid.Row="5" Grid.Column="3" Text="=" Command="{Binding Caculation}" CommandParameter="=" BackgroundColor="Orange" />
         </Grid>
