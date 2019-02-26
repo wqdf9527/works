@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Windows.Input;
 using Xamarin.Forms;
 using System.ComponentModel;
+using Xamarin.Essentials;
+using System.Threading.Tasks;
+using System.Linq;
 
 namespace testapp
 {
@@ -18,8 +21,6 @@ namespace testapp
     public class CalculationViewmodle : INotifyPropertyChanged
     {
         private string _value = "0";
-
-
         public string Value
         {
             get { return _value; }
@@ -30,24 +31,19 @@ namespace testapp
         private string secondrecord = string.Empty;
         private string symbol = string.Empty;
         private string status = string.Empty;
-
         private bool isdot = false;      
         private bool isequal = false;
         private bool islonger = false;
 
-
         public enum Status { Isplus, Issubtract, Ismultiplication, Isdivision ,first};   
-
         public ICommand Caculation { get; set; }
         public ICommand Zero { get; set; }
         public ICommand Percent { get; set; }
         public ICommand Reciprocal { get; set; }
 
-
-
         public CalculationViewmodle()
         {
-            this.Zero = new Command(() => 
+            this.Zero = new Command(() =>
             {
                 this.Value = "0";
                 record = string.Empty;
@@ -57,17 +53,22 @@ namespace testapp
                 isdot = false;
                 isequal = false;
                 islonger = false;
+                SpeakNow("0");
+            });
+
+            Reciprocal = new Command(() =>
+            {
+                this.Value = (double.Parse(this.Value) * (-1)).ToString();
+                SpeakNow(this.Value);
             });
 
 
-            Reciprocal = new Command(() => this.Value = (double.Parse(this.Value) *(-1)).ToString());
             Percent = new Command(() =>
             {
                 this.Value = (double.Parse(this.Value) / 100).ToString();
-                //record = this.Value;
+                SpeakNow(this.Value);
                 this.Isdecimal();
             });
-
 
             Caculation = new Command(input =>
                 {
@@ -75,56 +76,46 @@ namespace testapp
                     {
                         case "+":
                             this.Operate("+", Status.Isplus.ToString());
+                            SpeakNow("加");
                             break;
 
                         case "-":
                             this.Operate("-", Status.Issubtract.ToString());
+                            SpeakNow("減");
                             break;
 
                         case "*":
                             this.Operate("*", Status.Ismultiplication.ToString());
+                            SpeakNow("乘");
                             break;
 
                         case "/":
                             this.Operate("/", Status.Isdivision.ToString());
+                            SpeakNow("除");
                             break;
 
                         case ".":
                             this.Isdecimal();
                             if (!isdot)
                             {
-                                if (status == string.Empty)
+                                if (status == string.Empty || secondrecord != string.Empty)
                                 {
                                     this.Value += ".";
-
-                                }
-                                else if(symbol!= string.Empty)
-                                {
-                                    if (secondrecord != string.Empty)
-                                    {
-                                        this.Value += ".";
-                                    }
-                                }
-                                else if(symbol == string.Empty)
-                                {
-                                    if (secondrecord != string.Empty)
-                                    {
-                                        this.Value += ".";
-                                    }
-                                }
+                                    SpeakNow(".");
+                                }                         
                                 isdot = true;
-                            }
-                        
+                            }            
                             break;
 
                         case "=":
+                            SpeakNow("等於");
                             symbol = string.Empty;
                             islonger = false;
-                            if (!string.IsNullOrEmpty(record)&&!string.IsNullOrEmpty(this.Value))
+                            if (!string.IsNullOrEmpty(record) && !string.IsNullOrEmpty(this.Value))
                             {
                                 if (!isequal)
                                 {
-                                    if (status=="Isplus")
+                                    if (status == "Isplus")
                                     {
                                         secondrecord = this.Value;
                                         this.Value = (double.Parse(record) + double.Parse(this.Value)).ToString();
@@ -149,12 +140,12 @@ namespace testapp
                                 else
                                 {
                                     if (status == "Isplus")
-                                    {                                      
+                                    {
                                         this.Value = (double.Parse(this.Value) + double.Parse(secondrecord)).ToString();
                                     }
                                     else if (status == "Issubtract")
                                     {
-                                        this.Value = (double.Parse(this.Value)- double.Parse(secondrecord)).ToString();
+                                        this.Value = (double.Parse(this.Value) - double.Parse(secondrecord)).ToString();
                                     }
                                     else if (status == "Ismultiplication")
                                     {
@@ -165,25 +156,27 @@ namespace testapp
                                         this.Value = (double.Parse(this.Value) / double.Parse(secondrecord)).ToString();
                                     }
                                 }
-                                this.Isdecimal();
                             }
-                            else
-                                this.Isdecimal();
+                            SpeakNow(this.Value);
+                            this.Isdecimal();
                             break;
 
                         default:
                             if (Value == "0")
                             {
                                 this.Value = input.ToString();
+                                SpeakNow(input.ToString());
                             }
                             else if(isequal&& !islonger)
                             {
                                 this.Value = input.ToString();
+                                SpeakNow(input.ToString());
                                 islonger = true;
                             }
                             else if(symbol!= string.Empty && !islonger)
                             {                              
                                 this.Value = input.ToString();
+                                SpeakNow(input.ToString());
                                 secondrecord = this.Value;
                                 islonger = true;
                             }
@@ -192,16 +185,19 @@ namespace testapp
                                 if (symbol == string.Empty && islonger==false)
                                 {
                                     this.Value = input.ToString();
+                                    SpeakNow(input.ToString());
                                     record = string.Empty;
                                 }
                                 else
                                 {
                                     this.Value += input;
+                                    SpeakNow(input.ToString());
                                 }
                             }
                             else
                             {
                                 this.Value += input;
+                                SpeakNow(input.ToString());
                             }
                             break;
                     }
@@ -218,6 +214,7 @@ namespace testapp
             {
                 this.Value = (double.Parse(record) + double.Parse(this.Value)).ToString();
                 record = this.Value;
+                SpeakNow("等於"+this.Value);
                 islonger = false;
                 status = Status.Isplus.ToString();
             }
@@ -225,6 +222,7 @@ namespace testapp
             {
                 this.Value = (double.Parse(record) - double.Parse(this.Value)).ToString();
                 record = this.Value;
+                SpeakNow("等於" + this.Value);
                 islonger = false;
                 status = Status.Issubtract.ToString();
             }
@@ -232,6 +230,7 @@ namespace testapp
             {
                 this.Value = (double.Parse(record) * double.Parse(this.Value)).ToString();
                 record = this.Value;
+                SpeakNow("等於" + this.Value);
                 islonger = false;
                 status = Status.Ismultiplication.ToString();
             }
@@ -239,12 +238,12 @@ namespace testapp
             {
                 this.Value = (double.Parse(record) / double.Parse(this.Value)).ToString();
                 record = this.Value;
+                SpeakNow("等於" + this.Value);
                 islonger = false;
                 status = Status.Isdivision.ToString();
             }
             this.Isdecimal();
         }
-
 
         /// <summary>
         /// 判斷是否有小數點
@@ -262,14 +261,12 @@ namespace testapp
                 {
                     isdot = false;
                 }
-            }                 
+            }
         }
-
         /// <summary>
         /// 加減乘除運算
         /// </summary>
-
-        public void Operate(string strsymbol,string strstatus)
+        public void Operate(string strsymbol, string strstatus)
         {
             this.Isdecimal();
             if (symbol != string.Empty)
@@ -281,7 +278,7 @@ namespace testapp
                 }
                 else
                 {
-                    this.Symbol();
+                    Symbol();
                     symbol = strsymbol;
                     status = strstatus;
                     secondrecord = string.Empty;
@@ -300,6 +297,23 @@ namespace testapp
                 this.Value = record;
             }
             islonger = false;
+        }
+
+        /// <summary>
+        /// 大聲朗讀
+        /// </summary>
+
+        public async Task SpeakNow(string content)
+        {
+            var locales =await TextToSpeech.GetLocalesAsync();
+            var locale = locales.Where(l => l.Language == "zh-TW").First();
+            var settings = new SpeechOptions()
+            {
+                Volume = (float?)1.0,
+                Pitch = (float?)1.0,
+                Locale = locale
+        };
+           await TextToSpeech.SpeakAsync(content, settings);
         }
 
 
